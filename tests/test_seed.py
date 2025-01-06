@@ -8,7 +8,6 @@ def re_seed():
 
 
 
-
 class TestRikishiTable:
     def test_seed_creates_rikishi_table(self, re_seed):
         query = connect_to_db().run('SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = \'rikishi\');')
