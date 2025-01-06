@@ -2,3 +2,4 @@ fastapi[all]
 python-dotenv
 pg8000
 pytest
+pytest-testdox
