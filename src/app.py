@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
 from src.queries import get_rikishi, get_rikishi_by_id
 from src.utils import format_rikishi
 
@@ -15,6 +15,11 @@ def root():
 
 @app.get("/api/rikishi/{id}")
 def root(id=int):
-    rikishi = get_rikishi_by_id(id)
-    formatted_rikishi = format_rikishi(rikishi)[0]
-    return {"rikishi": formatted_rikishi}
+        rikishi = get_rikishi_by_id(id)
+        formatted_rikishi = format_rikishi(rikishi)[0]
+        return {"rikishi": formatted_rikishi}
+
+    
+# @app.exception_handler(ValueError)
+# def handle_error(request: Request, exc: ValueError):
+#     print(exc, 'it is here')
