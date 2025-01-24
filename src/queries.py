@@ -22,3 +22,16 @@ def get_rikishi_by_id(id):
     except ValueError:
         raise HTTPException(status_code=400, detail=f"Rikishi id should be a number")
     return result
+
+
+def get_stable_by_id(id):
+    try:
+        int_id = int(id)
+        query = f"SELECT * FROM stables WHERE stable_id = {literal(int_id)};"
+        conn = connect_to_db()
+        result = conn.run(query)
+        if not result:
+            raise HTTPException(status_code=404, detail=f"Stable {id} not found!")
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Stable id should be a number")
+    return result

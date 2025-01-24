@@ -50,3 +50,17 @@ response = {
         "debut": "200703", 
         "sumoapi_id": 12346}
 }
+
+
+#### GET stable
+```py
+/api/stables/1
+
+response = {
+    "stable_name": "honshu",
+    "stable_id": 1,
+    "ranking": 0,
+    "rikishi": None
+}
+
+```

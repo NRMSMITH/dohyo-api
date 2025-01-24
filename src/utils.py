@@ -17,3 +17,7 @@ def format_rikishi(rikishi_list):
         rikishi_dict['sumoapi_id'] = rikishi[12]
         format_rikishi_list.append(rikishi_dict)
     return format_rikishi_list
+
+def format_stables(stable_list):
+    format_stables_list = [{"stable_name": stable_name, "stable_id": stable_id, "ranking": ranking, "rikishi": rikishi} for stable_name, stable_id, ranking, rikishi in stable_list]
+    return format_stables_list

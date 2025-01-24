@@ -8,27 +8,6 @@ from fastapi import HTTPException
 def re_seed():
     seed_db('test')
 
-class TestRikishi():
-    def test_get_rikishi(self, re_seed):
-        client = TestClient(app)
-        response = client.get("/api/rikishi")
-        assert response.status_code == 200
-        rikishi = response.json()['rikishi']
-        for ri in rikishi:
-            assert isinstance(ri['id'], int)
-            assert isinstance(ri['sumodb_id'], int)
-            assert isinstance(ri['nsk_id'], int)
-            assert isinstance(ri['shikona_en'], str)
-            assert isinstance(ri['shikona_jp'], str)
-            assert isinstance(ri['current_rank'], str)
-            assert isinstance(ri['heya'], str)
-            assert isinstance(ri['birth_date'], str)
-            assert isinstance(ri['shusshin'], str)
-            assert isinstance(ri['height'], str)
-            assert isinstance(ri['weight'], str)
-            assert isinstance(ri['debut'], str)
-            assert isinstance(ri['sumoapi_id'], int)
-
 class TestRikishiTable():
     def test_get_rikishi(self, re_seed):
         client = TestClient(app)
@@ -76,3 +55,27 @@ class TestGenericError():
         client = TestClient(app)
         response = client.get("/a")
         assert response.status_code == 404
+
+class TestStableTable():
+    def test_get_stable_200(self, re_seed):
+        client = TestClient(app)
+        response = client.get("/api/stables/1")
+        assert response.status_code == 200
+        assert response.json()['stable'] == {
+            "stable_name": "honshu",
+            "stable_id": 1,
+            "ranking": 0,
+            "rikishi": None
+        }
+    
+    def test_get_stable_404(self, re_seed):
+        client = TestClient(app)
+        response = client.get("/api/stables/123456789")
+        assert response.status_code == 404
+        assert response.json()['detail'] == "Stable 123456789 not found!"
+
+    def test_get_stable_400(self, re_seed):
+        client = TestClient(app)
+        response = client.get("/api/stables/not_an_id")
+        assert response.status_code == 400
+        assert response.json()['detail'] == "Stable id should be a number"
