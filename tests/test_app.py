@@ -70,3 +70,9 @@ class TestRikishiTable():
         response = client.get("/api/rikishi/not_an_id")
         assert response.status_code == 400
         assert response.json()['detail'] == expected
+
+class TestGenericError():
+    def test_404_endpoint_not_found(self, re_seed):
+        client = TestClient(app)
+        response = client.get("/a")
+        assert response.status_code == 404
