@@ -19,7 +19,3 @@ def root(id=int):
         formatted_rikishi = format_rikishi(rikishi)[0]
         return {"rikishi": formatted_rikishi}
 
-    
-# @app.exception_handler(ValueError)
-# def handle_error(request: Request, exc: ValueError):
-#     print(exc, 'it is here')
