@@ -62,12 +62,11 @@ class TestRikishiTable():
         client = TestClient(app)
         response = client.get("/api/rikishi/27")
         assert response.status_code == 404
-        assert response["detail"] == expected
+        assert response.json()['detail'] == expected
         
     def test_get_rikishi_by_id_invalid_id(self, re_seed):
         expected = "Rikishi id should be a number"
         client = TestClient(app)
-        with pytest.raises(HTTPException) as exc_info:
-            client.get("/api/rikishi/not_an_id")
-        assert exc_info.status_code == 400
-        assert exc_info.detail == expected
+        response = client.get("/api/rikishi/not_an_id")
+        assert response.status_code == 400
+        assert response.json()['detail'] == expected
