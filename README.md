@@ -64,3 +64,18 @@ response = {
 }
 
 ```
+
+### POST new rikishi stable
+```py
+/api/rikishistables
+
+response = {
+    "rikishi_stable_id": 1,
+    "makuuchi": 36,
+    "juryo": 85,
+    "makushita": 175,
+    "sandanme": 218,
+    "jonidan": 299,
+    "jonokuchi": 595
+}
+```

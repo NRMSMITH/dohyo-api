@@ -57,6 +57,7 @@ class TestGenericError():
         assert response.status_code == 404
 
 class TestStableTable():
+
     def test_get_stable_200(self, re_seed):
         client = TestClient(app)
         response = client.get("/api/stables/1")
@@ -79,3 +80,19 @@ class TestStableTable():
         response = client.get("/api/stables/not_an_id")
         assert response.status_code == 400
         assert response.json()['detail'] == "Stable id should be a number"
+
+class TestRikishiStableTable():
+    def test_post_rikishi_stable_201(self, re_seed):
+        client = TestClient(app)
+        response = client.post("/api/rikishistables", json={"makuuchi": 4,"juryo": 13, "makushita": 12, "sandanme": 1, "jonidan": 2, "jonokuchi": 7})
+        assert response.status_code == 201
+        owned_stable = response.json()
+        assert owned_stable["stable"] == {
+    "rikishi_stable_id": 1,
+    "makuuchi": 4,
+    "juryo": 13,
+    "makushita": 12,
+    "sandanme": 1,
+    "jonidan": 2,
+    "jonokuchi": 7
+}

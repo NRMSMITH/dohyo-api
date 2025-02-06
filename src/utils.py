@@ -21,3 +21,7 @@ def format_rikishi(rikishi_list):
 def format_stables(stable_list):
     format_stables_list = [{"stable_name": stable_name, "stable_id": stable_id, "ranking": ranking, "rikishi": rikishi} for stable_name, stable_id, ranking, rikishi in stable_list]
     return format_stables_list
+
+def format_owned_stable(columns, stable):
+    format_stables_dict = {columns[0]: stable[0], columns[1]: stable[1], columns[2]: stable[2], columns[3]: stable[3], columns[4]: stable[4], columns[5]: stable[5], columns[6]: stable[6]}
+    return format_stables_dict
